@@ -1,0 +1,26 @@
+info:
+  name: "@project.artifactId@"
+  version: "@project.version@"
+  description: "@project.description@"
+  running-profile: "${spring.profiles.active}"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1001/eureka
+    register-with-eureka: false
+    fetch-registry: false
+  environment: Local
+  datacenter: Buenos Aires
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/chickenTestFarm?verifyServerCertificate=false&useSSL=false
+    username: root
+    password: SaAm_4106
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 1001
