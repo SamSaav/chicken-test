@@ -1,9 +1,10 @@
 package com.accenture.microservice.microchickenserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Entity
 public class Chicken {
@@ -14,11 +15,18 @@ public class Chicken {
 
     private Integer number;
 
-    public Chicken(){}
+    private Integer farm_id;
 
-    public Chicken(Integer number){
+    @OneToMany(mappedBy = "chicken", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Egg> eggs;
+
+    public Chicken() {
+    }
+
+    public Chicken(Integer number, Integer farm_id) {
         this.id = null;
         this.number = number;
+        this.farm_id = farm_id;
     }
 
     public Integer getId() {
@@ -35,5 +43,25 @@ public class Chicken {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Integer getFarm_id() {
+        return farm_id;
+    }
+
+    public void setFarm_id(Integer farm_id) {
+        this.farm_id = farm_id;
+    }
+
+    public List<Egg> getEggs() {
+        return eggs;
+    }
+
+    public void setEggs(List<Egg> eggs) {
+        this.eggs = eggs;
+    }
+
+    public List<Integer> getEggs_id(){
+        return this.getEggs().stream().map(Egg::getId).collect(Collectors.toList());
     }
 }

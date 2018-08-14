@@ -1,9 +1,8 @@
 package com.accenture.microservice.microfarmserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Farm {
@@ -14,11 +13,21 @@ public class Farm {
 
     private String name;
 
+    @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Chicken> chickens;
+
     public Farm(){}
 
-    public Farm(String name){
+    public Farm(String name, List<Chicken> chickens){
         this.id = null;
         this.name = name;
+        this.chickens = chickens;
+    }
+
+    public void addChicken(Integer id){
+        Chicken chicken = new Chicken(id);
+        chicken.setFarm(this);
+        chickens.add(chicken);
     }
 
     public Integer getId() {
@@ -35,5 +44,17 @@ public class Farm {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Chicken> getChickens() {
+        return chickens;
+    }
+
+    public void setChickens(List<Chicken> chickens) {
+        this.chickens = chickens;
+    }
+
+    public List<Integer> getChicken_id(){
+        return this.getChickens().stream().map(Chicken::getId).collect(Collectors.toList());
     }
 }

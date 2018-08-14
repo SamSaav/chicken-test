@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EggService {
@@ -25,6 +27,16 @@ public class EggService {
         Egg egg = eggRepository.getById(id);
         if (egg != null){
             return egg;
+        }else return null;
+    }
+
+    public Map<String, Object> getEggDTO(Integer id){
+        Egg egg = eggRepository.getById(id);
+        Map<String, Object> getTheEgg = new LinkedHashMap<>();
+        getTheEgg.put("id", egg.getId());
+        getTheEgg.put("number", egg.getNumber());
+        if (egg != null){
+            return getTheEgg;
         }else return null;
     }
 
@@ -48,6 +60,7 @@ public class EggService {
             for(Egg e : lstEggs) {
                 if(e.getId() == egg.getId()) {
                     if(egg.getNumber() != null) e.setNumber(egg.getNumber());
+                    if(egg.getChicken() != null) e.setChicken(egg.getChicken());
                     eggRepository.save(e);
                     tORf = true;
                 }

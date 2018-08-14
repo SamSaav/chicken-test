@@ -16,12 +16,12 @@ eureka:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/chickenTestFarm?verifyServerCertificate=false&useSSL=false
+    url: jdbc:mysql://localhost:3306/farms?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: SaAm_4106
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 server:
   port: 1002

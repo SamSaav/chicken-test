@@ -14,14 +14,5 @@ eureka:
     hostname:  localhost
     instance-id: ${spring.application.name}:${random.int}
 
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/chickens?verifyServerCertificate=false&useSSL=false
-    username: root
-    password: SaAm_4106
-  jpa:
-    hibernate:
-      ddl-auto: update
-
 server:
-  port: 1004
+  port: 1005

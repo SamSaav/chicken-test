@@ -1,9 +1,8 @@
 package com.accenture.microservice.microeggserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Entity
 public class Egg {
@@ -14,11 +13,14 @@ public class Egg {
 
     private Integer number;
 
+    private Integer chicken;
+
     public Egg(){}
 
-    public Egg(Integer number){
+    public Egg(Integer number, Integer chicken){
         this.id = null;
         this.number = number;
+        this.chicken = chicken;
     }
 
     public Integer getId() {
@@ -35,5 +37,13 @@ public class Egg {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public Integer getChicken() {
+        return chicken;
+    }
+
+    public void setChicken(Integer chicken) {
+        this.chicken = chicken;
     }
 }

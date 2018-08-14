@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class EggController {
@@ -28,7 +29,7 @@ public class EggController {
     //	Metodo para obtener una granja espesifica
     @RequestMapping(value = "/eggs/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getEgg(@PathVariable("id") int id){
-        Egg egg = eggService.getEgg(id);
+        Map<String, Object> egg = eggService.getEggDTO(id);
         if(egg != null) {
             return new ResponseEntity<>(egg, HttpStatus.OK);
         }
